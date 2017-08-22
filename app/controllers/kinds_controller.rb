@@ -1,5 +1,5 @@
 class KindsController < ApplicationController
-  TOKEN = "secret123"
+  #TOKEN = "secret123"
   #include ActionController::HttpAuthentication::Basic::ControllerMethods
   #http_basic_authenticate_with name: "marcus", password: "secret"
 
@@ -67,10 +67,12 @@ class KindsController < ApplicationController
       #  USERS[username]
       #end
       authenticate_or_request_with_http_token do |token, options|
-        ActiveSupport::SecurityUtils.secure_compare(
-          ::Digest::SHA256.hexdigest(token),
-          ::Digest::SHA256.hexdigest(TOKEN)
-        )
+        hmac_secret = 'my$ecretK3y'
+        decoded_token = JWT.decode token, hmac_secret, true, { :algorithm => 'HS256' }
+        #ActiveSupport::SecurityUtils.secure_compare(
+        #  ::Digest::SHA256.hexdigest(token),
+        #  ::Digest::SHA256.hexdigest(TOKEN)
+        #)
       end
     end
 end
