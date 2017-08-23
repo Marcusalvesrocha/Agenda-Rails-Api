@@ -21,6 +21,10 @@ gem 'jwt'
 #Token based authentication for Rails JSON APIs. Designed to work with jToker and ng-token-auth
 gem 'devise_token_auth'
 gem 'devise-i18n'
+#A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for Ruby webapps
+gem 'kaminari'
+#Link header pagination for Rails and Grape APIs.
+gem 'api-pagination'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'

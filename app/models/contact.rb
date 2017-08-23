@@ -1,4 +1,6 @@
 class Contact < ApplicationRecord
+  # kaminari
+  paginates_per 5
   
   #Associações
   belongs_to :kind#, optional: true
