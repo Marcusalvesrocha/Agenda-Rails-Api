@@ -3,8 +3,13 @@ class ContactsController < ApplicationController
 
   # GET /contacts
   def index
-    @contacts = Contact.all
-
+    if params[:version] == '1'
+      @contacts = Contact.all
+    elsif params[:version] == '2'
+      @contacts = Contact.last(2)
+    else
+      @contacts = {"msg": "não existe a version #{params[:version]}"}
+    end
     render json: @contacts# , include: :kind, methods: [:hello, :i18n]
   end
 
