@@ -9,6 +9,8 @@ module V1
       per_size = params[:page].try(:[], :size)
       @contacts = Contact.all.page(page_number).per(per_size)
 
+      #Caching control
+      expires_in 30.seconds, public: true
       render json: @contacts# , include: :kind, methods: [:hello, :i18n]
       #paginate json: @contacts# , include: :kind, methods: [:hello, :i18n]
     end
