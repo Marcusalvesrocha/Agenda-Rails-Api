@@ -50,6 +50,8 @@ group :development, :test do
   gem 'faker'
   #Rails >= 3 pry initializer
   gem 'pry-rails'
+  #
+  gem 'rspec-rails', '~> 3.6'
 end
 
 group :development do
