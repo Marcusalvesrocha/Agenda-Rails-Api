@@ -4,7 +4,7 @@ namespace :dev do
 
     puts "DROP - CREATE - MIGRATE"
 
-    %x(rails db:drop db:create db:migrate)
+    #%x(rails db:drop db:create db:migrate)
 
     puts "Sucesso"
 
