@@ -2,14 +2,14 @@ require 'rails_helper'
 
 describe V1::ContactsController, type: :controller do
 
-	it 'request index and return 406 ok' do
+	it 'request index and return 406 not not acceptable' do
 		get :index
-		expect(response).to have_http_status(406)
+		expect(response).to have_http_status(:not_acceptable)
 	end
 
 	it 'request index and return 200 ok' do
 		request.accept = 'application/vnd.api+json'
 		get :index
-		expect(response).to have_http_status(200)
+		expect(response).to have_http_status(:ok)
 	end
 end
