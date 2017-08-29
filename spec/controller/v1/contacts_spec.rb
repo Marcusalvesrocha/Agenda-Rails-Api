@@ -1,5 +1,14 @@
 require 'rails_helper'
 
+class Hash
+	def json(parts)
+		ary = parts.split(">")
+		ary.reduce(self) do |memo, key|
+			memo.fetch(key.to_s.strip) if memo
+		end
+	end
+end
+
 describe V1::ContactsController, type: :controller do
 
 	it 'request index and return 406 not not acceptable' do
@@ -17,7 +26,11 @@ describe V1::ContactsController, type: :controller do
 		contact = Contact.first
 		request.accept = 'application/vnd.api+json'
 		get :show, params: {id: contact.id}
+
 		response_body = JSON.parse(response.body)
-		expect(response_body.fetch('data').fetch('id')).to eql(contact.id.to_s)
+
+		expect(response_body.json('data > id')).to eql(contact.id.to_s)
+		expect(response_body.json('data > type')).to eql('contacts')
+		expect(response_body.json('data > attributes > name')).to eql(contact.name)
 	end
 end
